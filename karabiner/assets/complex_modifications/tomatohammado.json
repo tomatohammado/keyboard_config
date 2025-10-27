@@ -16,6 +16,41 @@
       ]
     },
     {
+      "description": "Caps Lock to Escape on single press, Right Control on hold.",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "caps_lock",
+            "modifiers": { "optional": ["any"] }
+          },
+          "to": [{ "key_code": "right_control" }],
+          "to_if_alone": [{ "key_code": "escape" }]
+        }
+      ]
+    },
+    {
+      "description": "Caps Lock - Fallback",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "right_control",
+            "modifiers": {
+              "mandatory": ["shift", "command"],
+              "optional": ["any"]
+            }
+          },
+          "to": [
+            {
+              "key_code": "caps_lock"
+            }
+          ],
+          "description": "For Claude Code shortcut"
+        }
+      ]
+    },
+    {
       "description": "Spacebar-Command Mode: Spacebar + Right Shift to Right Command",
       "manipulators": [
         {
@@ -213,7 +248,8 @@
               "key_code": "quote",
               "modifiers": ["left_shift"]
             }
-          ]
+          ],
+          "description": "For Ergodox, I think"
         }
       ]
     },
@@ -244,7 +280,8 @@
               "key_code": "slash",
               "modifiers": ["left_shift"]
             }
-          ]
+          ],
+          "description": "For Ergodox, I think"
         }
       ]
     }

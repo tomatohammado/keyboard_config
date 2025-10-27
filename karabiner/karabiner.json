@@ -10,6 +10,70 @@
                 },
                 "rules": [
                     {
+                        "description": "Caps Lock - Fallback",
+                        "manipulators": [
+                            {
+                                "description": "For Claude Code shortcut",
+                                "from": {
+                                    "key_code": "right_control",
+                                    "modifiers": {
+                                        "mandatory": ["shift", "command"],
+                                        "optional": ["any"]
+                                    }
+                                },
+                                "to": [{ "key_code": "caps_lock" }],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "Better Shifting: Shift rolls",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "left_shift",
+                                    "modifiers": { "mandatory": ["right_shift"] }
+                                },
+                                "to": [
+                                    { "key_code": "left_shift" },
+                                    { "key_code": "right_shift" }
+                                ],
+                                "to_if_alone": [
+                                    {
+                                        "key_code": "0",
+                                        "modifiers": ["right_shift", "left_shift"]
+                                    },
+                                    {
+                                        "key_code": "9",
+                                        "modifiers": ["right_shift", "left_shift"]
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "from": {
+                                    "key_code": "right_shift",
+                                    "modifiers": { "mandatory": ["left_shift"] }
+                                },
+                                "to": [
+                                    { "key_code": "right_shift" },
+                                    { "key_code": "left_shift" }
+                                ],
+                                "to_if_alone": [
+                                    {
+                                        "key_code": "9",
+                                        "modifiers": ["right_shift"]
+                                    },
+                                    {
+                                        "key_code": "0",
+                                        "modifiers": ["right_shift"]
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
                         "description": "Better Shifting: Parentheses on shift keys",
                         "manipulators": [
                             {
@@ -30,56 +94,6 @@
                                     {
                                         "key_code": "0",
                                         "modifiers": ["right_shift"]
-                                    }
-                                ],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
-                        "description": "Question Mark for simultaneous Cmd + Slash",
-                        "manipulators": [
-                            {
-                                "from": {
-                                    "simultaneous": [
-                                        { "key_code": "left_command" },
-                                        { "key_code": "slash" }
-                                    ],
-                                    "simultaneous_options": {
-                                        "key_down_order": "strict",
-                                        "key_up_order": "strict"
-                                    }
-                                },
-                                "parameters": { "basic.simultaneous_threshold_milliseconds": 110 },
-                                "to": [
-                                    {
-                                        "key_code": "slash",
-                                        "modifiers": ["left_shift"]
-                                    }
-                                ],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
-                        "description": "Double Quotes for simultaneous Cmd + Single Quote",
-                        "manipulators": [
-                            {
-                                "from": {
-                                    "simultaneous": [
-                                        { "key_code": "left_command" },
-                                        { "key_code": "quote" }
-                                    ],
-                                    "simultaneous_options": {
-                                        "key_down_order": "strict",
-                                        "key_up_order": "strict"
-                                    }
-                                },
-                                "parameters": { "basic.simultaneous_threshold_milliseconds": 110 },
-                                "to": [
-                                    {
-                                        "key_code": "quote",
-                                        "modifiers": ["left_shift"]
                                     }
                                 ],
                                 "type": "basic"
