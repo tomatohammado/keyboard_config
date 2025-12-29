@@ -18,19 +18,21 @@ Previously, I used a forked `.keyboard` repository that included Hammerspoon con
    mkdir -p ~/.config
    ln -sfn $PWD/karabiner ~/.config/karabiner
 
-   # Confirm
+   # Verify symlink
    ls -l ~/.config/karabiner
+   # Expected output:
+   # lrwxr-xr-x@ 1 hammad staff 45 Dec 29 18:43 /Users/hammad/.config/karabiner -> /Users/hammad/Code/karabiner_config/karabiner
    ```
 
    - The symlink command creates a link between this repository and Karabiner's default configuration location.
 
-3. Install Karabiner-Elements (recommended method: Homebrew)
+3. Install Karabiner-Elements from the official website:
 
-   ```sh
-   brew install --cask karabiner-elements
-   ```
+   Download from [https://karabiner-elements.pqrs.org/](https://karabiner-elements.pqrs.org/) and run the installer.
 
 4. Open Karabiner-Elements. Your custom configurations should now be applied.
+
+5. Enable auto-update in Karabiner-Elements preferences to keep the software current.
 
 ## Useful Links
 
