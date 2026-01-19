@@ -30,7 +30,7 @@
       ]
     },
     {
-      "description": "Caps Lock - Fallback",
+      "description": "Caps Lock - Fallback (Shift + Command <-> R Control) ",
       "manipulators": [
         {
           "type": "basic",
@@ -47,6 +47,25 @@
             }
           ],
           "description": "For Claude Code shortcut"
+        }
+      ]
+    },
+    {
+      "description": "Caps Lock Right Control: Right Shift to Escape",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "right_shift",
+            "modifiers": { "mandatory": ["right_control"] }
+          },
+          "to": [{ "key_code": "right_shift", "modifiers": ["right_control"] }],
+          "to_if_alone": [
+            {
+              "key_code": "escape",
+              "modifiers": ["right_control"]
+            }
+          ]
         }
       ]
     },
