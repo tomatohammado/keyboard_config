@@ -34,23 +34,6 @@
                         ]
                     },
                     {
-                        "description": "Caps Lock - Fallback (Shift + Command <-> R Control) ",
-                        "manipulators": [
-                            {
-                                "description": "For Claude Code shortcut",
-                                "from": {
-                                    "key_code": "right_control",
-                                    "modifiers": {
-                                        "mandatory": ["shift", "command"],
-                                        "optional": ["any"]
-                                    }
-                                },
-                                "to": [{ "key_code": "caps_lock" }],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
                         "description": "Better Shifting: Shift rolls",
                         "manipulators": [
                             {

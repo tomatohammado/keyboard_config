@@ -46,7 +46,7 @@
               "key_code": "caps_lock"
             }
           ],
-          "description": "For Claude Code shortcut"
+          "description": "For Claude Code shortcut. Makes Hyper-ish chords harder, disabling for now"
         }
       ]
     },
