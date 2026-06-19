@@ -43,6 +43,9 @@ then open it once and:
 - Enable **"Launch Hammerspoon at login"**.
 - Grant **Accessibility** (and any related) permissions in System Settings.
 
+> On this first launch — before the symlink in the next step — Hammerspoon's console
+> may warn that it can't find `init.lua`. That's expected; the next step puts it in place.
+
 Symlink the config:
 
 ```sh
