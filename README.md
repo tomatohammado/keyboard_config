@@ -1,30 +1,26 @@
 # Keyboard Configuration
 
-This repository contains my macOS keyboard setup — Karabiner-Elements key
-remappings plus a small Hammerspoon on-screen indicator — kept in version control
-for synchronization across machines.
+My macOS keyboard setup — Karabiner-Elements remappings and a Hammerspoon vim-mode
+indicator — version-controlled for syncing across machines.
 
-It is intentionally standalone and is the **first** thing set up on a new machine:
-my Colemak-DH + vim-navigation layout is a prerequisite for comfortably doing
-everything else, including the yadm dotfiles bootstrap.
+> **Prerequisite:** the [Colemak-DH](https://github.com/ColemakMods/mod-dh/tree/master/macOS)
+> keyboard layout. Install that input source bundle first — everything here assumes it.
 
-## Background
-
-This started as a fork of [`keyboard`](https://github.com/tomatohammado/keyboard)
-(itself based on jasonrudolph/keyboard), which bundled an extensive Hammerspoon
-setup. I stripped Hammerspoon out for a while to keep things lean. It's back now
-in a deliberately minimal form: a single on-screen badge that shows when my
-`colemak_vim_nav` mode is active — nothing more.
+These keyboard dotfiles are a deliberate **high-priority exception** to my
+[yadm_dotfiles (GH)](https://github.com/tomatohammado/yadm_dotfiles) dotfile
+management: they're pulled out into this standalone repo and set up early, ahead
+of the main yadm bootstrap, so a new machine is comfortable to type on as soon
+as possible.
 
 ## Setup Instructions
 
 ### 1. Clone
 
-Clone this repository on your new machine and `cd` into it.
+Clone this repo on the new machine and `cd` into it.
 
 ### 2. Karabiner-Elements
 
-Symlink the Karabiner config into place:
+Symlink the config into place:
 
 ```sh
 # https://github.com/tekezo/Karabiner-Elements/issues/597#issuecomment-282760186
@@ -36,48 +32,48 @@ ls -l ~/.config/karabiner
 # -> /Users/hammad/.config/karabiner -> /Users/hammad/Code/keyboard_config/karabiner
 ```
 
-Install Karabiner-Elements from the [official site](https://karabiner-elements.pqrs.org/),
-open it, and your configuration is applied. Enable auto-update in its preferences.
+Then install Karabiner-Elements from the [official site](https://karabiner-elements.pqrs.org/),
+open it, and the config is applied. Enable auto-update in its preferences.
 
-### 3. Hammerspoon on-screen indicator (optional)
+### 3. Hammerspoon
 
-A lightweight visual indicator for vim-navigation mode. While Left-Shift+Space is
-held, Karabiner sets the `colemak_vim_nav` variable **and** calls Hammerspoon to
-show a small floating badge (bottom-right of the active screen); on release it
-hides again. It uses an `hs.canvas` overlay rather than a menu-bar item, so it is
-immune to menu-bar managers like Bartender. It is purely cosmetic — if Hammerspoon
-isn't installed, key remapping still works, because Karabiner runs the calls
-asynchronously and a missing `hs` fails harmlessly.
+Install [Hammerspoon](https://www.hammerspoon.org/) (manual download — no Homebrew cask),
+then open it once and:
 
-**Dependency:** [Hammerspoon](https://www.hammerspoon.org/), installed manually
-(I don't use Homebrew casks). Open it once and grant it Accessibility in
-System Settings.
+- Enable **"Launch Hammerspoon at login"**.
+- Grant **Accessibility** (and any related) permissions in System Settings.
 
-Symlink the config (backing up any existing `init.lua` first):
+Symlink the config:
 
 ```sh
 mkdir -p ~/.hammerspoon
-[ -e ~/.hammerspoon/init.lua ] && [ ! -L ~/.hammerspoon/init.lua ] && \
-  mv ~/.hammerspoon/init.lua ~/.hammerspoon/init.lua.backup
+
+# If an init.lua already exists, back it up first:
+# mv ~/.hammerspoon/init.lua ~/.hammerspoon/init.lua.backup
+
+# Symlink our config into place
 ln -sfn $PWD/hammerspoon/init.lua ~/.hammerspoon/init.lua
+
+# Verify
+ls -l ~/.hammerspoon/init.lua
 ```
 
-Reload Hammerspoon (menu bar → **Reload Config**, or relaunch the app). On load,
-`init.lua` runs `hs.ipc.cliInstall("/opt/homebrew")`, which installs the `hs`
-command-line tool to `/opt/homebrew/bin/hs` (Apple Silicon) so Karabiner can call
-it. On an Intel Mac, use the default prefix (`hs.ipc.cliInstall()` →
-`/usr/local/bin/hs`) and update the Karabiner snippets below to match.
+Reload the config (Hammerspoon menu → **Reload Config**, or relaunch the app).
 
-> Hammerspoon must be **running** for the `hs` calls to work — keep it as a login
-> item.
+## Features
 
-#### Karabiner wiring
+> Apple Silicon (arm64) only — this setup is known not to work on Intel Macs.
 
-These calls are already wired into this repo's config, in the
-"Colemak Vim Navigation: Activate via Left Shift + Space" rule — in both
-`karabiner/karabiner.json` (the live config Karabiner serves) and
-`karabiner/assets/complex_modifications/colemak_vimish_navigation.json` (the
-importable asset). For reference, the added `shell_command` events are:
+### Karabiner-Elements
+
+- **Space Cadet Caps Lock** — Right Control on hold, Escape on tap.
+- **Better Shift Keys** — tapping a shift key produces a parenthesis.
+- **Colemak Vim Navigation** — home-row arrows, Page Up/Down, and Home/End. Shift + "up/down" -> 5 up/5 down
+
+### Hammerspoon
+
+**Colemak Vim Navigation indicator** — a small floating badge appears while the mode is
+active. Karabiner drives it directly from the activate rule:
 
 ```jsonc
 "to": [
@@ -90,11 +86,6 @@ importable asset). For reference, the added `shell_command` events are:
 ]
 ```
 
-The badge draws `hammerspoon/vim-indicator.png` if present (use a light/white glyph
-so it reads on the dark badge); if the file is missing, `init.lua` falls back to a
-bold "V". Appearance (size, margin, background) is configurable via constants at
-the top of `init.lua`.
-
 ## Useful Links
 
 - [StackOverflow about ln command flags](https://superuser.com/a/938865)
@@ -104,3 +95,9 @@ the top of `init.lua`.
 ---
 
 - [Old Medium article where I probably found the repo I forked](https://medium.com/@caulfieldOwen/turn-your-keyboard-into-a-text-editing-rocket-1514d8474d2d)
+
+### Origin
+
+I forked [`keyboard`](https://github.com/tomatohammado/keyboard) (based on
+jasonrudolph/keyboard) and learned a lot from that opinionated setup. I created this
+repo when I wanted a small, focused, intentional config of just what I use.
