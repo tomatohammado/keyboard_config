@@ -99,3 +99,6 @@ end
 function vimOff()
   if overlay then overlay:hide() end
 end
+
+-- Confirm the config loaded/reloaded.
+hs.notify.new({ title = "Hammerspoon", informativeText = "Ready to rock 🤘" }):send()
