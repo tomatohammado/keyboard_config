@@ -1,7 +1,7 @@
 # Keyboard Configuration
 
 This repository contains my macOS keyboard setup — Karabiner-Elements key
-remappings plus a small Hammerspoon menu-bar indicator — kept in version control
+remappings plus a small Hammerspoon on-screen indicator — kept in version control
 for synchronization across machines.
 
 It is intentionally standalone and is the **first** thing set up on a new machine:
@@ -13,7 +13,7 @@ everything else, including the yadm dotfiles bootstrap.
 This started as a fork of [`keyboard`](https://github.com/tomatohammado/keyboard)
 (itself based on jasonrudolph/keyboard), which bundled an extensive Hammerspoon
 setup. I stripped Hammerspoon out for a while to keep things lean. It's back now
-in a deliberately minimal form: a single menu-bar indicator that shows when my
+in a deliberately minimal form: a single on-screen badge that shows when my
 `colemak_vim_nav` mode is active — nothing more.
 
 ## Setup Instructions
@@ -39,13 +39,15 @@ ls -l ~/.config/karabiner
 Install Karabiner-Elements from the [official site](https://karabiner-elements.pqrs.org/),
 open it, and your configuration is applied. Enable auto-update in its preferences.
 
-### 3. Hammerspoon menu-bar indicator (optional)
+### 3. Hammerspoon on-screen indicator (optional)
 
 A lightweight visual indicator for vim-navigation mode. While Left-Shift+Space is
 held, Karabiner sets the `colemak_vim_nav` variable **and** calls Hammerspoon to
-show a menu-bar item; on release it hides it again. It is purely cosmetic — if
-Hammerspoon isn't installed, key remapping still works, because Karabiner runs the
-calls asynchronously and a missing `hs` fails harmlessly.
+show a small floating badge (bottom-right of the active screen); on release it
+hides again. It uses an `hs.canvas` overlay rather than a menu-bar item, so it is
+immune to menu-bar managers like Bartender. It is purely cosmetic — if Hammerspoon
+isn't installed, key remapping still works, because Karabiner runs the calls
+asynchronously and a missing `hs` fails harmlessly.
 
 **Dependency:** [Hammerspoon](https://www.hammerspoon.org/), installed manually
 (I don't use Homebrew casks). Open it once and grant it Accessibility in
@@ -88,9 +90,10 @@ importable asset). For reference, the added `shell_command` events are:
 ]
 ```
 
-The indicator icon is `hammerspoon/vim-indicator.png`, loaded as a template image
-that adapts to light/dark menu bars. If the file is missing, `init.lua` falls back
-to a bold "V" title so the indicator still appears.
+The badge draws `hammerspoon/vim-indicator.png` if present (use a light/white glyph
+so it reads on the dark badge); if the file is missing, `init.lua` falls back to a
+bold "V". Appearance (size, margin, background) is configurable via constants at
+the top of `init.lua`.
 
 ## Useful Links
 
