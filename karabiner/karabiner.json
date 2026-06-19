@@ -377,7 +377,8 @@
                                             "name": "colemak_vim_nav",
                                             "value": 1
                                         }
-                                    }
+                                    },
+                                    { "shell_command": "/opt/homebrew/bin/hs -c 'vimOn()'" }
                                 ],
                                 "to_after_key_up": [
                                     {
@@ -385,7 +386,8 @@
                                             "name": "colemak_vim_nav",
                                             "value": 0
                                         }
-                                    }
+                                    },
+                                    { "shell_command": "/opt/homebrew/bin/hs -c 'vimOff()'" }
                                 ],
                                 "type": "basic"
                             }
