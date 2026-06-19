@@ -23,7 +23,8 @@ local iconPath = scriptDir .. "vim-indicator.png"
 -- Appearance (tweak to taste).
 local SIZE = 56            -- badge width/height, points
 local MARGIN = 24          -- gap from the screen edges
-local BG = { black = 1, alpha = 0.55 } -- dark translucent badge; reads on any wallpaper
+local BG = { black = 1, alpha = 0.55 }   -- dark translucent badge; reads on any wallpaper
+local FG = { white = 1, alpha = 0.95 }   -- glyph color
 
 local overlay = nil        -- the hs.canvas badge, created once and reused
 local iconResolved = false
@@ -37,36 +38,43 @@ local function loadIcon()
   return cachedIcon
 end
 
--- The glyph drawn inside the badge: the icon asset if present (should be a light
--- glyph to read on the dark badge), otherwise a bold "V".
-local function glyphElement()
-  local icon = loadIcon()
-  if icon then
-    return {
-      type = "image", image = icon,
-      imageScaling = "scaleProportionally", imageAlignment = "center",
-      frame = { x = SIZE * 0.18, y = SIZE * 0.18, w = SIZE * 0.64, h = SIZE * 0.64 },
-    }
-  end
-  return {
-    type = "text",
-    text = hs.styledtext.new("V", {
-      font = { name = "Menlo-Bold", size = math.floor(SIZE * 0.6) },
-      color = { white = 1, alpha = 0.95 },
-      paragraphStyle = { alignment = "center" },
-    }),
-    frame = { x = 0, y = SIZE * 0.14, w = SIZE, h = SIZE },
-  }
-end
-
 local function ensureOverlay()
   if overlay then return overlay end
   overlay = hs.canvas.new({ x = 0, y = 0, w = SIZE, h = SIZE })
-  overlay:appendElements(
-    { type = "rectangle", action = "fill",
-      roundedRectRadii = { xRadius = 14, yRadius = 14 }, fillColor = BG },
-    glyphElement()
-  )
+
+  local icon = loadIcon()
+  if icon then
+    -- Draw the glyph, recolor it to FG, then drop the badge in behind it. The
+    -- composite tricks mean the source PNG can be any color (it's used only as
+    -- an alpha mask), so it always renders as a clean FG silhouette on the badge.
+    overlay:appendElements(
+      { type = "image", image = icon,
+        imageScaling = "scaleProportionally", imageAlignment = "center",
+        frame = { x = SIZE * 0.20, y = SIZE * 0.20, w = SIZE * 0.60, h = SIZE * 0.60 } },
+      { type = "rectangle", action = "fill", fillColor = FG,
+        frame = { x = 0, y = 0, w = SIZE, h = SIZE },
+        compositeRule = "sourceIn" },
+      { type = "rectangle", action = "fill", fillColor = BG,
+        frame = { x = 0, y = 0, w = SIZE, h = SIZE },
+        roundedRectRadii = { xRadius = 14, yRadius = 14 },
+        compositeRule = "destinationOver" }
+    )
+  else
+    -- Fallback: a bold "V" on the badge when the icon asset is missing.
+    overlay:appendElements(
+      { type = "rectangle", action = "fill", fillColor = BG,
+        frame = { x = 0, y = 0, w = SIZE, h = SIZE },
+        roundedRectRadii = { xRadius = 14, yRadius = 14 } },
+      { type = "text",
+        text = hs.styledtext.new("V", {
+          font = { name = "Menlo-Bold", size = math.floor(SIZE * 0.6) },
+          color = FG,
+          paragraphStyle = { alignment = "center" },
+        }),
+        frame = { x = 0, y = SIZE * 0.14, w = SIZE, h = SIZE } }
+    )
+  end
+
   -- Float above normal windows and follow onto every space (incl. full screen).
   overlay:level(hs.canvas.windowLevels.overlay)
   overlay:behavior(hs.canvas.windowBehaviors.canJoinAllSpaces
