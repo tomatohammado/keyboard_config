@@ -18,13 +18,17 @@
       ]
     },
     {
-      "description": "Colemak Vim Navigation: Arrows, Page Up/Down, Home/End",
+      "description": "Colemak Vim Navigation: Arrows, Page Up/Down, Home/End (Non-built-in keyboard)",
       "manipulators": [
         {
           "type": "basic",
           "from": { "key_code": "n" },
           "conditions": [
-            { "type": "variable_if", "name": "colemak_vim_nav", "value": 1 }
+            { "type": "variable_if", "name": "colemak_vim_nav", "value": 1 },
+            {
+              "type": "device_if",
+              "identifiers": [{ "is_built_in_keyboard": false }]
+            }
           ],
           "to": [{ "key_code": "down_arrow" }]
         },
@@ -32,7 +36,11 @@
           "type": "basic",
           "from": { "key_code": "n", "modifiers": { "mandatory": ["shift"] } },
           "conditions": [
-            { "type": "variable_if", "name": "colemak_vim_nav", "value": 1 }
+            { "type": "variable_if", "name": "colemak_vim_nav", "value": 1 },
+            {
+              "type": "device_if",
+              "identifiers": [{ "is_built_in_keyboard": false }]
+            }
           ],
           "to": [{ "key_code": "5" }, { "key_code": "down_arrow" }]
         },
@@ -40,7 +48,11 @@
           "type": "basic",
           "from": { "key_code": "e" },
           "conditions": [
-            { "type": "variable_if", "name": "colemak_vim_nav", "value": 1 }
+            { "type": "variable_if", "name": "colemak_vim_nav", "value": 1 },
+            {
+              "type": "device_if",
+              "identifiers": [{ "is_built_in_keyboard": false }]
+            }
           ],
           "to": [{ "key_code": "up_arrow" }]
         },
@@ -48,7 +60,11 @@
           "type": "basic",
           "from": { "key_code": "e", "modifiers": { "mandatory": ["shift"] } },
           "conditions": [
-            { "type": "variable_if", "name": "colemak_vim_nav", "value": 1 }
+            { "type": "variable_if", "name": "colemak_vim_nav", "value": 1 },
+            {
+              "type": "device_if",
+              "identifiers": [{ "is_built_in_keyboard": false }]
+            }
           ],
           "to": [{ "key_code": "5" }, { "key_code": "up_arrow" }]
         },
@@ -56,7 +72,11 @@
           "type": "basic",
           "from": { "key_code": "i" },
           "conditions": [
-            { "type": "variable_if", "name": "colemak_vim_nav", "value": 1 }
+            { "type": "variable_if", "name": "colemak_vim_nav", "value": 1 },
+            {
+              "type": "device_if",
+              "identifiers": [{ "is_built_in_keyboard": false }]
+            }
           ],
           "to": [{ "key_code": "right_arrow" }]
         },
@@ -64,7 +84,11 @@
           "type": "basic",
           "from": { "key_code": "m" },
           "conditions": [
-            { "type": "variable_if", "name": "colemak_vim_nav", "value": 1 }
+            { "type": "variable_if", "name": "colemak_vim_nav", "value": 1 },
+            {
+              "type": "device_if",
+              "identifiers": [{ "is_built_in_keyboard": false }]
+            }
           ],
           "to": [{ "key_code": "left_arrow" }]
         },
@@ -72,7 +96,11 @@
           "type": "basic",
           "from": { "key_code": "l" },
           "conditions": [
-            { "type": "variable_if", "name": "colemak_vim_nav", "value": 1 }
+            { "type": "variable_if", "name": "colemak_vim_nav", "value": 1 },
+            {
+              "type": "device_if",
+              "identifiers": [{ "is_built_in_keyboard": false }]
+            }
           ],
           "to": [{ "key_code": "page_down" }]
         },
@@ -80,7 +108,11 @@
           "type": "basic",
           "from": { "key_code": "u" },
           "conditions": [
-            { "type": "variable_if", "name": "colemak_vim_nav", "value": 1 }
+            { "type": "variable_if", "name": "colemak_vim_nav", "value": 1 },
+            {
+              "type": "device_if",
+              "identifiers": [{ "is_built_in_keyboard": false }]
+            }
           ],
           "to": [{ "key_code": "page_up" }]
         },
@@ -88,7 +120,11 @@
           "type": "basic",
           "from": { "key_code": "h" },
           "conditions": [
-            { "type": "variable_if", "name": "colemak_vim_nav", "value": 1 }
+            { "type": "variable_if", "name": "colemak_vim_nav", "value": 1 },
+            {
+              "type": "device_if",
+              "identifiers": [{ "is_built_in_keyboard": false }]
+            }
           ],
           "to": [{ "key_code": "end" }]
         },
@@ -96,7 +132,136 @@
           "type": "basic",
           "from": { "key_code": "comma" },
           "conditions": [
-            { "type": "variable_if", "name": "colemak_vim_nav", "value": 1 }
+            { "type": "variable_if", "name": "colemak_vim_nav", "value": 1 },
+            {
+              "type": "device_if",
+              "identifiers": [{ "is_built_in_keyboard": false }]
+            }
+          ],
+          "to": [{ "key_code": "home" }]
+        }
+      ]
+    },
+    {
+      "description": "Colemak Vim Navigation: Arrows, Page Up/Down, Home/End (Built-in keyboard)",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": { "key_code": "j" },
+          "conditions": [
+            { "type": "variable_if", "name": "colemak_vim_nav", "value": 1 },
+            {
+              "type": "device_if",
+              "identifiers": [{ "is_built_in_keyboard": true }]
+            }
+          ],
+          "to": [{ "key_code": "down_arrow" }]
+        },
+        {
+          "type": "basic",
+          "from": { "key_code": "j", "modifiers": { "mandatory": ["shift"] } },
+          "conditions": [
+            { "type": "variable_if", "name": "colemak_vim_nav", "value": 1 },
+            {
+              "type": "device_if",
+              "identifiers": [{ "is_built_in_keyboard": true }]
+            }
+          ],
+          "to": [{ "key_code": "5" }, { "key_code": "down_arrow" }]
+        },
+        {
+          "type": "basic",
+          "from": { "key_code": "k" },
+          "conditions": [
+            { "type": "variable_if", "name": "colemak_vim_nav", "value": 1 },
+            {
+              "type": "device_if",
+              "identifiers": [{ "is_built_in_keyboard": true }]
+            }
+          ],
+          "to": [{ "key_code": "up_arrow" }]
+        },
+        {
+          "type": "basic",
+          "from": { "key_code": "k", "modifiers": { "mandatory": ["shift"] } },
+          "conditions": [
+            { "type": "variable_if", "name": "colemak_vim_nav", "value": 1 },
+            {
+              "type": "device_if",
+              "identifiers": [{ "is_built_in_keyboard": true }]
+            }
+          ],
+          "to": [{ "key_code": "5" }, { "key_code": "up_arrow" }]
+        },
+        {
+          "type": "basic",
+          "from": { "key_code": "l" },
+          "conditions": [
+            { "type": "variable_if", "name": "colemak_vim_nav", "value": 1 },
+            {
+              "type": "device_if",
+              "identifiers": [{ "is_built_in_keyboard": true }]
+            }
+          ],
+          "to": [{ "key_code": "right_arrow" }]
+        },
+        {
+          "type": "basic",
+          "from": { "key_code": "h" },
+          "conditions": [
+            { "type": "variable_if", "name": "colemak_vim_nav", "value": 1 },
+            {
+              "type": "device_if",
+              "identifiers": [{ "is_built_in_keyboard": true }]
+            }
+          ],
+          "to": [{ "key_code": "left_arrow" }]
+        },
+        {
+          "type": "basic",
+          "from": { "key_code": "u" },
+          "conditions": [
+            { "type": "variable_if", "name": "colemak_vim_nav", "value": 1 },
+            {
+              "type": "device_if",
+              "identifiers": [{ "is_built_in_keyboard": true }]
+            }
+          ],
+          "to": [{ "key_code": "page_down" }]
+        },
+        {
+          "type": "basic",
+          "from": { "key_code": "i" },
+          "conditions": [
+            { "type": "variable_if", "name": "colemak_vim_nav", "value": 1 },
+            {
+              "type": "device_if",
+              "identifiers": [{ "is_built_in_keyboard": true }]
+            }
+          ],
+          "to": [{ "key_code": "page_up" }]
+        },
+        {
+          "type": "basic",
+          "from": { "key_code": "m" },
+          "conditions": [
+            { "type": "variable_if", "name": "colemak_vim_nav", "value": 1 },
+            {
+              "type": "device_if",
+              "identifiers": [{ "is_built_in_keyboard": true }]
+            }
+          ],
+          "to": [{ "key_code": "end" }]
+        },
+        {
+          "type": "basic",
+          "from": { "key_code": "comma" },
+          "conditions": [
+            { "type": "variable_if", "name": "colemak_vim_nav", "value": 1 },
+            {
+              "type": "device_if",
+              "identifiers": [{ "is_built_in_keyboard": true }]
+            }
           ],
           "to": [{ "key_code": "home" }]
         }
