@@ -2,34 +2,6 @@
   "title": "Experiments",
   "rules": [
     {
-      "description": "Right Control to Escape on single press, Control on hold.",
-      "manipulators": [
-        {
-          "type": "basic",
-          "from": {
-            "key_code": "right_control",
-            "modifiers": { "optional": ["any"] }
-          },
-          "to": [{ "key_code": "right_control" }],
-          "to_if_alone": [{ "key_code": "escape" }]
-        }
-      ]
-    },
-    {
-      "description": "Caps Lock to Escape on single press, Right Control on hold.",
-      "manipulators": [
-        {
-          "type": "basic",
-          "from": {
-            "key_code": "caps_lock",
-            "modifiers": { "optional": ["any"] }
-          },
-          "to": [{ "key_code": "right_control" }],
-          "to_if_alone": [{ "key_code": "escape" }]
-        }
-      ]
-    },
-    {
       "description": "Caps Lock - Fallback (Shift + Command <-> R Control) ",
       "manipulators": [
         {
@@ -47,25 +19,6 @@
             }
           ],
           "description": "For Claude Code shortcut. Makes Hyper-ish chords harder, disabling for now"
-        }
-      ]
-    },
-    {
-      "description": "Caps Lock Right Control: Right Shift to Escape",
-      "manipulators": [
-        {
-          "type": "basic",
-          "from": {
-            "key_code": "right_shift",
-            "modifiers": { "mandatory": ["right_control"] }
-          },
-          "to": [{ "key_code": "right_shift", "modifiers": ["right_control"] }],
-          "to_if_alone": [
-            {
-              "key_code": "escape",
-              "modifiers": ["right_control"]
-            }
-          ]
         }
       ]
     },
