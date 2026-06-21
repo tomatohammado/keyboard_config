@@ -29,7 +29,7 @@ ln -sfn $PWD/karabiner ~/.config/karabiner
 
 # Verify
 ls -l ~/.config/karabiner
-# -> /Users/hammad/.config/karabiner -> /Users/hammad/Code/keyboard_config/karabiner
+# -> /Users/hammad/.config/karabiner -> /Users/hammad/code/keyboard_config/karabiner
 ```
 
 Then install Karabiner-Elements from the [official site](https://karabiner-elements.pqrs.org/),
