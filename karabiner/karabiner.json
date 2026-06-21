@@ -364,12 +364,12 @@
                         ]
                     },
                     {
-                        "description": "Colemak Vim Navigation: Activate via Left Shift + Space",
+                        "description": "Colemak Vim Navigation: Activate via Right Shift + Space",
                         "manipulators": [
                             {
                                 "from": {
                                     "key_code": "spacebar",
-                                    "modifiers": { "mandatory": ["left_shift"] }
+                                    "modifiers": { "mandatory": ["right_shift"] }
                                 },
                                 "to": [
                                     {

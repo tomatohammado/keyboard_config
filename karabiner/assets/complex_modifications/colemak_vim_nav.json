@@ -2,13 +2,13 @@
   "title": "Colemak Vim Navigation",
   "rules": [
     {
-      "description": "Colemak Vim Navigation: Activate via Left Shift + Space",
+      "description": "Colemak Vim Navigation: Activate via Right Shift + Space",
       "manipulators": [
         {
           "type": "basic",
           "from": {
             "key_code": "spacebar",
-            "modifiers": { "mandatory": ["left_shift"] }
+            "modifiers": { "mandatory": ["right_shift"] }
           },
           "to": [
             { "set_variable": { "name": "colemak_vim_nav", "value": 1 } },
